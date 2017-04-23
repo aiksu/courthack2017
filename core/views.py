@@ -46,8 +46,8 @@ def get_dict(request):
 def send_email(request, email):
     try:
         send_mail(
-            subject="subject",
-            message="message",
+            subject="LawBot from CourtHack 2017",
+            message="Thank you for use LawBot!\nHave a nice day! ;)",
             from_email=DEFAULT_FROM_EMAIL,
             recipient_list=[email]
         )
