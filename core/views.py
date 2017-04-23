@@ -16,6 +16,10 @@ def get_dict(request):
     if not search_data:
         return JsonResponse([], safe=False)
 
+    qs = Dictonary.objects.filter(title=search_data.strip().upper())
+    if len(qs) > 0:
+        return JsonResponse(DictSerializer(qs, many=True).data, safe=False)
+
     qs = Dictonary.objects.filter(title__icontains=search_data)
     if len(qs) > 0:
         return JsonResponse(DictSerializer(qs, many=True).data, safe=False)
