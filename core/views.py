@@ -1,7 +1,9 @@
+from django.core.mail import send_mail
 from django.db.models import Q
 from django.http import JsonResponse
 from rest_framework import serializers
 
+from LawBot.settings import DEFAULT_FROM_EMAIL
 from core.models import Dictonary
 
 
@@ -39,3 +41,16 @@ def get_dict(request):
         q = q | Q(title__icontains=search_word)
     qs = Dictonary.objects.filter(q)
     return JsonResponse(DictSerializer(qs, many=True).data, safe=False)
+
+
+def send_email(request, email):
+    try:
+        send_mail(
+            subject="subject",
+            message="message",
+            from_email=DEFAULT_FROM_EMAIL,
+            recipient_list=[email]
+        )
+        return JsonResponse({'status': 'ok'}, safe=False)
+    except:
+        return JsonResponse({'status': 'bad'}, safe=False)
