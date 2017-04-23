@@ -15,6 +15,11 @@ def get_dict(request):
     search_data = request.GET.get('search')
     if not search_data:
         return JsonResponse([], safe=False)
+
+    qs = Dictonary.objects.filter(title__icontains=search_data)
+    if len(qs) > 0:
+        return JsonResponse(DictSerializer(qs, many=True).data, safe=False)
+
     search_data_list = search_data.split(' ')
     final_list = []
     for search_word in search_data_list:
@@ -22,11 +27,11 @@ def get_dict(request):
             continue
         else:
             final_list.append(search_word)
+    if not final_list:
+        final_list = search_data_list
 
     q = Q(title__icontains=final_list[0])
     for search_word in final_list[1:]:
-        if len(search_word) < 4:
-            continue
         q = q | Q(title__icontains=search_word)
     qs = Dictonary.objects.filter(q)
     return JsonResponse(DictSerializer(qs, many=True).data, safe=False)
