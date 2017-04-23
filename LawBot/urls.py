@@ -8,3 +8,4 @@ urlpatterns = [
     url(r'^dict/', get_dict),
     url(r'^email/(?P<email>[\s\S]+)/$', send_email),
 ]
+
