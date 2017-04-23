@@ -47,7 +47,7 @@ def send_email(request, email):
     try:
         send_mail(
             subject="LawBot from CourtHack 2017",
-            message="Thank you for use LawBot!\nHave a nice day! ;)",
+            message="Thanks for using LawBot!\nHave a nice day! ;)",
             from_email=DEFAULT_FROM_EMAIL,
             recipient_list=[email]
         )
