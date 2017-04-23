@@ -34,7 +34,6 @@ six==1.10.0
 steamodd==4.21
 Unidecode==0.4.20
 user-agent==0.1.5
-wagtail==1.9
 webencodings==0.5
 weblib==0.1.24
 wget==3.2
