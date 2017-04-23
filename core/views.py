@@ -44,10 +44,14 @@ def get_dict(request):
 
 
 def send_email(request, email):
+    text = "Thanks for using LawBot!\nHave a nice day! ;)"
+    message = request.GET.get('message')
+    if message:
+        text = message
     try:
         send_mail(
             subject="LawBot from CourtHack 2017",
-            message="Thanks for using LawBot!\nHave a nice day! ;)",
+            message=text,
             from_email=DEFAULT_FROM_EMAIL,
             recipient_list=[email]
         )
